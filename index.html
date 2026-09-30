@@ -3,103 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEKO_IN_THE_VOID - ULTIMATE</title>
+<title>NEKO_IN_THE_VOID</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#aaffcc;font-family:'Share Tech Mono',monospace;overflow:hidden;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:none}
-#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
-#void-cat{width:320px;height:320px;border:2px solid #00ff88;box-shadow:0 0 30px #00ff88, inset 0 0 30px rgba(0,255,136,0.2);border-radius:20px;position:relative;z-index:2;background:#0a0a0a;display:flex;align-items:center;justify-content:center;animation:glow 2s infinite alternate;cursor:pointer;overflow:hidden}
-@keyframes glow{from{box-shadow:0 0 20px #00ff88}to{box-shadow:0 0 50px #00ff88, 0 0 80px #00ff88}}
-#void-cat pre{font-size:8px;line-height:8px;color:#00ff88;transition:0.3s}
-#void-cat:hover pre{color:#fff;text-shadow:0 0 10px #00ff88}
-h1{margin-top:25px;font-size:28px;letter-spacing:6px;text-shadow:0 0 15px #00ff88;z-index:2;animation:glitch 3s infinite}
-@keyframes glitch{0%,90%,100%{transform:none}91%{transform:skew(2deg)}92%{transform:skew(-2deg)}}
-.subtitle{opacity:0.7;font-size:13px;margin-top:10px;z-index:2;text-align:center;padding:0 20px}
-.terminal{margin-top:20px;border:1px solid #00ff88;padding:12px 20px;background:rgba(0,255,136,0.05);font-size:11px;z-index:2;min-width:300px;text-align:left;backdrop-filter:blur(5px)}
-.terminal:hover{background:rgba(0,255,136,0.1);box-shadow:0 0 20px rgba(0,255,136,0.3)}
-.cursor{position:fixed;width:20px;height:20px;border:1px solid #00ff88;border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:screen;box-shadow:0 0 10px #00ff88;transition:0.1s}
-#secret{position:fixed;bottom:10px;right:10px;font-size:9px;opacity:0.3;z-index:2}
-.music-btn{position:fixed;top:15px;right:15px;z-index:10;background:rgba(0,255,136,0.1);border:1px solid #00ff88;color:#00ff88;padding:5px 12px;font-family:inherit;cursor:pointer}
-.music-btn:hover{background:#00ff88;color:#000}
+body{background:#000;color:#aaffcc;font-family:'Share Tech Mono',monospace;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px}
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.main{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:600px;width:100%}
+#void-cat{width:300px;height:200px;border:2px solid #00ff88;box-shadow:0 0 30px #00ff88;background:#0a0a0a;display:flex;align-items:center;justify-content:center;cursor:pointer}
+h1{margin-top:20px;font-size:26px;letter-spacing:5px;text-shadow:0 0 15px #00ff88}
+.terminal{margin-top:15px;border:1px solid #00ff88;padding:12px;background:rgba(0,255,136,0.05);width:100%;font-size:11px}
+
+/* GUESTBOOK STYLE */
+.guestbook{margin-top:30px;width:100%;border:2px solid #ff88ff;box-shadow:0 0 20px rgba(255,136,255,0.4);padding:20px;background:rgba(20,0,20,0.8)}
+.guestbook h2{color:#ff88ff;text-align:center;margin-bottom:15px;letter-spacing:3px}
+.guestbook input, .guestbook textarea{width:100%;background:#000;border:1px solid #ff88ff;color:#aaffcc;padding:8px;margin-bottom:10px;font-family:inherit}
+.guestbook button{background:#ff88ff;color:#000;border:none;padding:10px 20px;font-family:inherit;cursor:pointer;width:100%;font-weight:bold}
+.guestbook button:hover{background:#fff;box-shadow:0 0 15px #ff88ff}
+.msg{border-bottom:1px dashed rgba(255,136,255,0.3);padding:10px 0;font-size:12px}
+.msg b{color:#ff88ff}
 </style>
 </head>
 <body>
 <canvas id="particles"></canvas>
-<div class="cursor" id="cursor"></div>
-<button class="music-btn" onclick="toggleMusic()">♪ MUSIC: OFF</button>
-
-<div id="void-cat" onclick="meow()">
-<pre id="cat-art">
-      /\_/\  
-     ( o.o )  MEOW!
-      > ^ <
-   NEKO_IN_THE_VOID
-   [ ▓▓▓░░  SYSTEM ]
-   [ EYE: ◉ WATCHING ]
-</pre>
-</div>
-
+<div class="main">
+<div id="void-cat" onclick="meow()"><pre id="cat">  /\_/\ 
+ ( o.o ) MEOW!
+  > ^ <
+NEKO_IN_THE_VOID</pre></div>
 <h1>NEKO_IN_THE_VOID</h1>
-<p class="subtitle">> A mysterious cat that lives in the void. You can't see it, but it sees you.</p>
+<div class="terminal" onclick="hack()"><div>[STATUS: ACTIVE] [LOCATION: THE VOID]</div><div id="log"></div></div>
 
-<div class="terminal" onclick="hack()">
-<div>[STATUS: ACTIVE]</div>
-<div>[LOCATION: THE VOID]</div>
-<div>[EYES: WATCHING YOU - BLINKING]</div>
-<div id="log" style="margin-top:8px;color:#ff88ff"></div>
-<div style="margin-top:8px;opacity:0.5">> Click to hack the void [CLICK ME]</div>
+<div class="guestbook">
+<h2>◆ VOID GUESTBOOK ◆</h2>
+<p style="font-size:10px;opacity:0.7;margin-bottom:10px;text-align:center">Tinggalkan pesan di void... semua orang bisa lihat!</p>
+<input id="name" placeholder="Nama kamu (ex: neko from bandung)">
+<textarea id="message" placeholder="Pesan untuk neko..."></textarea>
+<button onclick="addMsg()">[ SEND TO VOID ]</button>
+<div id="messages" style="margin-top:15px;max-height:250px;overflow-y:auto"></div>
 </div>
-
-<div id="secret">void-node-09 // Medan, ID // 2026</div>
-
-<audio id="bgm" loop>
-<source src="https://commondatastorage.googleapis.com/codeskulptor-assets/week7-bounce.m4a" type="audio/mp4">
-</audio>
+</div>
 
 <script>
-// Particles snow void
-const c=document.getElementById('particles'),ctx=c.getContext('2d');
-function resize(){c.width=window.innerWidth;c.height=window.innerHeight}
-resize();window.onresize=resize;
-const parts=[];for(let i=0;i<80;i++)parts.push({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*2+0.5,v:Math.random()*1+0.3,o:Math.random()});
-function draw(){ctx.clearRect(0,0,c.width,c.height);parts.forEach(p=>{p.y+=p.v;if(p.y>c.height){p.y=-10;p.x=Math.random()*c.width}ctx.fillStyle=`rgba(0,255,136,${p.o})`;ctx.fillRect(p.x,p.y,p.s,p.s)});requestAnimationFrame(draw)}draw();
+// particles
+const c=document.getElementById('particles'),x=c.getContext('2d');
+function r(){c.width=innerWidth;c.height=innerHeight}r();onresize=r;
+const p=[];for(let i=0;i<60;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,v:Math.random()+0.5});
+(function d(){x.clearRect(0,0,c.width,c.height);p.forEach(o=>{o.y+=o.v;if(o.y>c.height)o.y=-5;x.fillStyle='rgba(0,255,136,0.5)';x.fillRect(o.x,o.y,2,2)});requestAnimationFrame(d)})();
 
-// Cursor mata kucing
-const cur=document.getElementById('cursor');
-document.addEventListener('mousemove',e=>{cur.style.left=e.clientX-10+'px';cur.style.top=e.clientY-10+'px'});
+function meow(){document.getElementById('log').innerHTML='> MEOW! +10 void energy'; if(navigator.vibrate)navigator.vibrate(50)}
+function hack(){let pw=prompt('VOID PASSWORD:');if(pw && pw.toLowerCase()=='void')document.getElementById('log').innerHTML='> ACCESS GRANTED<br>> Welcome to guestbook!';else document.getElementById('log').innerHTML='> Hint: void';}
 
-// Meow + getar
-function meow(){
-let a=new Audio('https://commondatastorage.googleapis.com/codeskulptor-assets/week7-button.m4a');
-a.volume=0.8;a.play();
-if(navigator.vibrate)navigator.vibrate([80,40,80]);
-document.getElementById('cat-art').innerHTML=`      /\\_/\\  \n     ( >.<)  *PURR*\n      > ^ <\n   NEKO LOVES YOU\n   [ ♡♡♡ MEOW ♡♡♡ ]`;
-setTimeout(()=>{document.getElementById('cat-art').innerHTML=`      /\\_/\\  \n     ( o.o )  MEOW!\n      > ^ <\n   NEKO_IN_THE_VOID\n   [ ▓▓▓░░  SYSTEM ]\n   [ EYE: ◉ WATCHING ]`;},1500);
-document.getElementById('log').innerHTML='> MEOW! void energy +10';
-}
-
-// Hack terminal
-let clicks=0;
-function hack(){
-clicks++;
-let log=document.getElementById('log');
-if(clicks==1){let p=prompt('ENTER VOID PASSWORD:');if(p && p.toLowerCase()=='void'){log.innerHTML='> ACCESS GRANTED<br>> Welcome to the void, Medan user...<br>> Secret file: neko_loves_you.txt';document.body.style.background='#0a0014';}else{log.innerHTML='> ACCESS DENIED<br>> Hint: password is "void"';}}
-else{log.innerHTML='> void coin mined: '+(clicks*13)+' VOID<br>> Keep clicking!';}
-}
-
-// Music
-let playing=false;
-function toggleMusic(){
-const bgm=document.getElementById('bgm'),btn=document.querySelector('.music-btn');
-if(!playing){bgm.play();btn.innerText='♪ MUSIC: ON (void ambient)';playing=true}else{bgm.pause();btn.innerText='♪ MUSIC: OFF';playing=false}
-}
-
-// Eye blink
-setInterval(()=>{
-const eye=document.getElementById('cat-art');
-if(Math.random()>0.7){eye.style.opacity='0.2';setTimeout(()=>eye.style.opacity='1',120);}
-},2000);
+// GUESTBOOK LOGIC - save to browser
+let msgs=JSON.parse(localStorage.getItem('void_msgs')||'[]');
+function render(){document.getElementById('messages').innerHTML=msgs.slice().reverse().map(m=>`<div class="msg"><b>${m.name}</b> <span style="opacity:0.5;font-size:9px">${m.time}</span><br>${m.text}</div>`).join('')||'<div style="opacity:0.4;font-size:10px;text-align:center">Belum ada pesan... jadi yang pertama!</div>'}
+function addMsg(){let n=document.getElementById('name').value||'Anonymous', t=document.getElementById('message').value; if(!t)return alert('Tulis pesan dulu beb!'); msgs.push({name:n,text:t,time:new Date().toLocaleString()}); localStorage.setItem('void_msgs',JSON.stringify(msgs)); document.getElementById('message').value=''; render(); document.getElementById('log').innerHTML='> Message sent to void!';}
+render();
 </script>
 </body>
 </html>
