@@ -1,11 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEKO_IN_THE_VOID</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#aaffcc;font-family:'Share Tech Mono',monospace;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:30px 15px;overflow-x:hidden}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+.main{position:relative;z-index:2;width:100%;max-width:600px;display:flex;flex-direction:column;align-items:center}
+#cat-box{width:310px;height:310px;border:2px solid #00ff88;border-radius:24px;overflow:hidden;box-shadow:0 0 25px #00ff88;cursor:pointer;position:relative;background:#0a0a0a}
+#cat-box img{width:100%;height:100%;object-fit:cover}
+h1{margin-top:20px;font-size:28px;letter-spacing:6px;text-shadow:0 0 15px #00ff88;text-align:center}
+.sub{opacity:.7;font-size:12px;margin-top:8px;text-align:center}
+.terminal{margin-top:18px;border:1px solid #00ff88;background:rgba(0,255,136,0.06);padding:12px;width:100%;font-size:11px}
+.music{position:fixed;top:12px;right:12px;z-index:10;background:rgba(0,255,136,.1);border:1px solid #00ff88;color:#00ff88;padding:6px 12px;font-family:inherit;cursor:pointer;font-size:11px}
+.guest{margin-top:28px;width:100%;border:2px solid #ff88ff;box-shadow:0 0 22px rgba(255,136,255,.45);padding:18px;background:rgba(20,0,20,.85)}
+.guest h2{color:#ff88ff;text-align:center;letter-spacing:3px;margin-bottom:10px}
+.guest input,.guest textarea{width:100%;background:#000;border:1px solid #ff88ff;color:#ccffdd;padding:8px;margin-bottom:8px;font-family:inherit;font-size:12px}
+.guest button{background:#ff88ff;color:#000;border:none;padding:10px;width:100%;font-weight:bold;cursor:pointer;font-family:inherit}
+.msg{border-bottom:1px dashed rgba(255,136,255,.25);padding:8px 0;font-size:11px}
+.msg b{color:#ff88ff}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<button class="music" onclick="toggleMusic()" id="musicBtn">♪ MEOW: OFF</button>
+<div class="main">
+<div id="cat-box" onclick="meow()"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&q=80"></div>
+<h1>NEKO_IN_THE_VOID</h1>
+<p class="sub">> Klik kucing = MEOW ASLI!</p>
+<div class="terminal" onclick="hack()"><div>[STATUS: ACTIVE]</div><div id="log" style="margin-top:8px;color:#ff88ff"></div></div>
+<div class="guest"><h2>◆ VOID GUESTBOOK ◆</h2><input id="name" placeholder="Nama kamu"><textarea id="msg" rows="3" placeholder="Pesan untuk Neko..."></textarea><button onclick="send()">[ SEND TO VOID ]</button><div id="list" style="margin-top:12px;max-height:220px;overflow:auto"></div></div>
+</div>
+<audio id="bgm" loop><source src="https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73467.mp3" type="audio/mpeg"></audio>
+<script>
+const cv=document.getElementById('particles'),ctx=cv.getContext('2d');function rs(){cv.width=innerWidth;cv.height=innerHeight}rs();addEventListener('resize',rs);const pts=[];for(let i=0;i<70;i++)pts.push({x:Math.random()*cv.width,y:Math.random()*cv.height,v:0.3+Math.random()*1.2});(function loop(){ctx.clearRect(0,0,cv.width,cv.height);pts.forEach(p=>{p.y+=p.v;if(p.y>cv.height){p.y=-10;p.x=Math.random()*cv.width}ctx.fillStyle='rgba(0,255,136,0.6)';ctx.fillRect(p.x,p.y,2,2)});requestAnimationFrame(loop)})();
 function meow(){
-let sounds=[
-"https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73467.mp3",
-"https://cdn.pixabay.com/audio/2022/03/24/audio_8f1f52b98b.mp3",
-"https://cdn.pixabay.com/audio/2021/08/04/audio_a9bd4170e8.mp3"
-];
+let sounds=["https://cdn.pixabay.com/audio/2022/03/10/audio_c8c8a73467.mp3","https://cdn.pixabay.com/audio/2022/03/24/audio_8f1f52b98b.mp3","https://cdn.pixabay.com/audio/2021/08/04/audio_a9bd4170e8.mp3"];
 let url=sounds[Math.floor(Math.random()*sounds.length)];
 let a=new Audio(url);a.volume=0.9;a.play();
 if(navigator.vibrate)navigator.vibrate([60,30,60]);
 document.getElementById('log').innerHTML='> MEOW ASLI! 😼';
 }
+let play=false;function toggleMusic(){let bg=document.getElementById('bgm'),b=document.getElementById('musicBtn');if(!play){bg.play();b.textContent='♪ MEOW: ON';play=true}else{bg.pause();b.textContent='♪ MEOW: OFF';play=false}}
+function hack(){let p=prompt('PASSWORD:');let l=document.getElementById('log');if(p&&p.toLowerCase()==='void'){l.innerHTML='> ACCESS GRANTED<br>> Neko loves you!';}else{l.innerHTML='> hint: void'}}
+let data=JSON.parse(localStorage.getItem('void_guest')||'[]');function render(){let el=document.getElementById('list');if(!data.length){el.innerHTML='<div style="opacity:.4;text-align:center;font-size:10px">belum ada pesan...</div>';return}el.innerHTML=data.slice().reverse().map(m=>`<div class="msg"><b>${m.n}</b> <span style="opacity:.5">${m.t}</span><br>${m.m}</div>`).join('')}function send(){let n=document.getElementById('name').value||'Anonymous',m=document.getElementById('msg').value;if(!m)return alert('Tulis pesan dulu!');data.push({n,m,t:new Date().toLocaleString('id-ID')});localStorage.setItem('void_guest',JSON.stringify(data));document.getElementById('msg').value='';render();}
+render();
+</script>
+</body>
+</html>
