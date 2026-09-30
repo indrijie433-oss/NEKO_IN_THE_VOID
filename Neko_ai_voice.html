@@ -1,33 +1,120 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEKO AI VOICE</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Outfit,sans-serif;background:#0a0a14;color:white;height:100vh;display:flex;overflow:hidden}
-.bg{position:fixed;inset:0;background:radial-gradient(circle at 30% 20%,#ff3a8a33 0%,transparent 50%),radial-gradient(circle at 80% 80%,#7c3aed44 0%,transparent 50%),#0a0a14;z-index:-2}
-.left{width:42%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;border-right:1px solid #ffffff11}
-.avatar-wrap{width:300px;height:300px;position:relative}.avatar{width:100%;height:100%;background:radial-gradient(circle at 50% 30%,#ffd6e8,#ff6fae 40%,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:140px;box-shadow:0 0 80px #ff3a8a66;animation:float 3s ease-in-out infinite;transition:.3s}
-.avatar.talking{animation:float 3s ease-in-out infinite,talk.15s infinite alternate;box-shadow:0 0 120px #ff3a8a99}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes talk{0%{transform:translateY(-10px) scale(1)}100%{transform:translateY(-10px) scale(1.05)}}
-.status{margin-top:24px;background:#ffffff0f;border:1px solid #ffffff1a;padding:10px 22px;border-radius:99px;display:flex;align-items:center;gap:10px;font-size:14px}.dot{width:10px;height:10px;background:#00ff88;border-radius:50%;box-shadow:0 0 10px #00ff88}
-.name{margin-top:14px;font-size:30px;font-weight:800}.name span{color:#ff6fae}.desc{opacity:.6;font-size:13px;margin-top:2px}
-.right{flex:1;display:flex;flex-direction:column;background:#ffffff05}.header{padding:16px 20px;border-bottom:1px solid #ffffff10;display:flex;justify-content:space-between;align-items:center}.btn-small{background:#ffffff10;border:1px solid #ffffff15;color:white;padding:8px 14px;border-radius:99px;font-size:12px;cursor:pointer}.btn-small.active{background:#ff3a8a;border-color:#ff3a8a}
-.chat{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px}.msg{max-width:78%;padding:14px 18px;border-radius:18px;font-size:14px;line-height:1.5}.msg.ai{background:#1e1e32;border:1px solid #ffffff10;align-self:flex-start;border-bottom-left-radius:6px}.msg.user{background:linear-gradient(135deg,#ff3a8a,#7c3aed);align-self:flex-end;border-bottom-right-radius:6px}.msg.time{font-size:10px;opacity:.5;margin-top:6px}
-.input-area{padding:14px;border-top:1px solid #ffffff10;background:#0f0f1f;display:flex;gap:10px;align-items:center}.input-wrap{flex:1;background:#1a1a2e;border:1px solid #ffffff15;border-radius:99px;display:flex;align-items:center;padding:6px 6px 6px 20px}.input-wrap input{flex:1;background:transparent;border:none;color:white;outline:none;font-size:14px;font-family:Outfit}.icon-btn{width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px}.send{background:white;color:black}.mic{background:#ffffff12;color:white;border:1px solid #ffffff1a}.mic.recording{background:#ff3a8a;border-color:#ff3a8a;animation:pulse 1s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}.voice-bar{padding:0 18px 10px;font-size:11px;opacity:.6}
-@media(max-width:800px){body{flex-direction:column}.left{width:100%;padding:14px;flex-direction:row;gap:14px;border-right:none;border-bottom:1px solid #ffffff11}.avatar-wrap{width:80px;height:80px}.avatar{font-size:44px}.name{font-size:16px;margin:0}.desc,.status{font-size:11px;margin:0}}
-</style></head><body><div class="bg"></div>
-<div class="left"><div class="avatar-wrap"><div class="avatar" id="avatar">😺</div></div><div><div class="status"><div class="dot"></div> Online • Voice Active</div><div class="name">Neko <span>AI</span></div><div class="desc">tsundere • your personal ai waifu</div></div></div>
-<div class="right"><div class="header"><h2 style="font-size:15px">💬 Chat with Neko</h2><div style="display:flex;gap:8px"><button class="btn-small active" id="voiceToggle" onclick="toggleVoice()">🔊 ON</button><button class="btn-small" onclick="clearChat()">🗑️</button></div></div>
-<div class="chat" id="chat"><div class="msg ai">Hmph! Akhirnya kamu datang juga... b-bukan karena aku nungguin kamu kok! 😤💗<br><br>Aku Neko, AI waifu kamu. Klik 🎤 buat ngomong atau ketik aja. Aku bisa jawab pake suara juga lho!<div class="time">Neko • now</div></div></div>
-<div class="voice-bar" id="voiceBar">🎤 Klik mic buat ngomong • 🔊 Suara ON</div>
-<div class="input-area"><button class="icon-btn mic" id="micBtn" onclick="toggleMic()">🎤</button><div class="input-wrap"><input id="input" placeholder="Ketik pesan ke Neko..." onkeydown="if(event.key==='Enter')sendMsg()"><button class="icon-btn send" onclick="sendMsg()">➤</button></div></div></div>
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KAI - Study Buddy AI</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui;background:#0a0e14;color:white;height:100vh;display:flex}
+.left{width:38%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;border-right:1px solid #ffffff12;background:radial-gradient(500px at 30% 20%,#4a6fff22,transparent)}
+.avatar{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d0dcff,#6a8cff 40%,#3a4fcf);display:flex;align-items:center;justify-content:center;font-size:90px;box-shadow:0 0 50px #4a6fff55;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.avatar.talk{animation:float 3s ease-in-out infinite, talk.12s infinite alternate}
+@keyframes talk{0%{transform:translateY(-10px) scale(1,1)}100%{transform:translateY(-10px) scale(1.05,.95)}}
+.right{flex:1;display:flex;flex-direction:column}
+.chat{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+.msg{max-width:80%;padding:12px 16px;border-radius:18px;line-height:1.6;font-size:14px}
+.ai{background:#1c2335;align-self:flex-start;border-bottom-left-radius:6px}
+.user{background:#4a6fff;align-self:flex-end;border-bottom-right-radius:6px}
+.bar{padding:12px;border-top:1px solid #ffffff12;display:flex;gap:10px;background:#111827}
+.bar input{flex:1;background:#1f2937;border:1px solid #ffffff15;border-radius:99px;padding:12px 18px;color:white;outline:none}
+.bar button{background:white;color:black;border:none;border-radius:50%;width:44px;height:44px;cursor:pointer}
+.h{padding:12px 16px;border-bottom:1px solid #ffffff0e;display:flex;justify-content:space-between;font-size:12px;opacity:.8}
+</style></head><body>
+<div class="left"><div class="avatar" id="av">🧑‍💻</div><h2 style="margin-top:18px">KAI</h2><p style="opacity:.6;font-size:13px;margin-top:6px;text-align:center">soft spoken study buddy<br>semua bahasa • semua pelajaran</p><div id="status" style="margin-top:12px;background:#ffffff10;padding:6px 14px;border-radius:99px;font-size:11px">● online - lagi dengerin kamu</div></div>
+<div class="right">
+<div class="h"><span>💬 mode nyambung: ON • inget konteks</span><span><button onclick="toggleVoice()" id="vBtn" style="background:#ffffff12;color:white;border:1px solid #ffffff1a;padding:5px 10px;border-radius:99px;cursor:pointer">🔊 Voice ON</button></span></div>
+<div class="chat" id="chat"></div>
+<div class="bar"><input id="in" placeholder="tanya apa aja... mtk, ipa, inggris, curhat pelajaran..." onkeydown="if(event.key==='Enter')send()"><button onclick="send()">➤</button></div>
+</div>
 <script>
-const chatEl=document.getElementById('chat'),inputEl=document.getElementById('input'),avatarEl=document.getElementById('avatar'),micBtn=document.getElementById('micBtn'),voiceBar=document.getElementById('voiceBar');
-let voiceOn=true,isRecording=false,recognition=null;
-const replies={halo:["H-halo... baka! Kenapa baru ngechat sekarang? Aku udah nunggu tau! 😤💕"],sayang:["S-sayang?!! B-baka jangan ngomong gitu! Muka ku jadi merah...///"],cantik:["C-cantik? *blush* Tapi... makasih ya..."],kangen:["Aku juga kangen tau... jangan lama-lama ninggalin aku ya..."],default:["Ehehe~ kamu lucu deh! 💕 Ngomong lagi dong!","Hmph! Baka! Tapi aku suka sih perhatian kamu... 😳","Mou~ jangan bikin aku salting terus dong! Nanti sayang beneran lho! 💗","Baka baka! Tapi kalau kamu terus gini aku deg-degan tau..."]};
-function getReply(t){t=t.toLowerCase();for(let k in replies){if(k!='default'&&t.includes(k))return replies[k][Math.floor(Math.random()*replies[k].length)]}return replies.default[Math.floor(Math.random()*replies.default.length)]}
-function addMsg(text,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=text+`<div class=time>${who=='user'?'You':'Neko'} • now</div>`;chatEl.appendChild(d);chatEl.scrollTop=chatEl.scrollHeight}
-function speak(text){if(!voiceOn)return;speechSynthesis.cancel();const clean=text.replace(/<br>/g,' ').slice(0,200);const u=new SpeechSynthesisUtterance(clean);u.rate=1.15;u.pitch=1.4;avatarEl.classList.add('talking');u.onend=()=>avatarEl.classList.remove('talking');u.onerror=()=>avatarEl.classList.remove('talking');speechSynthesis.speak(u)}
-function sendMsg(){const t=inputEl.value.trim();if(!t)return;addMsg(t,'user');inputEl.value='';setTimeout(()=>{const r=getReply(t);addMsg(r,'ai');speak(r)},600)}
-function toggleVoice(){voiceOn=!voiceOn;document.getElementById('voiceToggle').textContent=voiceOn?'🔊 ON':'🔇 OFF';document.getElementById('voiceToggle').classList.toggle('active',voiceOn);voiceBar.textContent=voiceOn?'🎤 Mic aktif • 🔊 Suara ON':'🔇 Voice OFF';if(!voiceOn)speechSynthesis.cancel()}
-function toggleMic(){if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){alert('Pake Chrome ya beb buat mic!');return}if(isRecording){recognition.stop();return}const SR=window.SpeechRecognition||window.webkitSpeechRecognition;recognition=new SR();recognition.lang='id-ID';recognition.onstart=()=>{isRecording=true;micBtn.classList.add('recording');micBtn.textContent='⏹️';voiceBar.textContent='🔴 Dengerin... ngomong dong...';avatarEl.classList.add('talking')};recognition.onend=()=>{isRecording=false;micBtn.classList.remove('recording');micBtn.textContent='🎤';avatarEl.classList.remove('talking');voiceBar.textContent='🎤 Selesai • 🔊 ON'};recognition.onresult=(e)=>{inputEl.value=e.results[0][0].transcript;sendMsg()};recognition.start()}
-function clearChat(){chatEl.innerHTML=`<div class="msg ai">Yah... kamu hapus chat kita? Hmph! Yaudah aku maafin... chat lagi dong! 🥺<div class=time>Neko • now</div></div>`}
-speechSynthesis.getVoices();
+let voiceOn=true,history=[],av=document.getElementById('av'),chat=document.getElementById('chat'),input=document.getElementById('in');
+function addAI(t, noSpeak){
+  let d=document.createElement('div');d.className='msg ai';d.innerHTML=t;
+  chat.appendChild(d);chat.scrollTop=chat.scrollHeight;
+  history.push({r:'ai',t}); if(!noSpeak)speak(t); statusMood(t);
+}
+function addU(t){
+  let d=document.createElement('div');d.className='msg user';d.textContent=t;
+  chat.appendChild(d);chat.scrollTop=chat.scrollHeight; history.push({r:'u',t});
+}
+function speak(t){
+  if(!voiceOn)return;
+  speechSynthesis.cancel();
+  let clean=t.replace(/<[^>]*>/g,'').slice(0,250);
+  let u=new SpeechSynthesisUtterance(clean);
+  let voices=speechSynthesis.getVoices();
+  let v=voices.find(x=>x.lang.includes('id')&&x.name.toLowerCase().includes('male'))||voices.find(x=>x.lang.includes('id'))||voices[0];
+  if(v)u.voice=v; u.rate=0.9; u.pitch=0.85;
+  av.classList.add('talk'); u.onend=()=>av.classList.remove('talk'); u.onerror=()=>av.classList.remove('talk');
+  speechSynthesis.speak(u);
+}
+function statusMood(t){ document.getElementById('status').textContent='● '+ (t.length>100?'lagi jelasin pelan-pelan...':'lagi dengerin kamu'); }
+function detectLang(s){
+  if(/[ぁ-んァ-ン一-龯]/.test(s))return 'ja';
+  if(/[가-힣]/.test(s))return 'ko';
+  if(/[a-zA-Z]{4,}/.test(s) && s.toLowerCase().split(' ').length>2 &&!/[a-z]*[aiueo]{2,}/.test(s.toLowerCase()))return 'en';
+  return 'id';
+}
+function solveMath(q){
+  try{
+    let m=q.match(/(\d+[\+\-\*\/\^\%\(\)\d\s\.]+)/);
+    if(m){
+      let expr=m[0].replace(/\^/g,'**');
+      if(/^\d/.test(expr) && expr.length<30){ let res=Function('"use strict";return ('+expr+')')(); if(!isNaN(res)) return 'hasilnya '+res+'\n\nmau aku jelasin langkahnya?'; }
+    }
+  }catch(e){}
+  return null;
+}
+function answerLesson(msg){
+  let m=msg.toLowerCase();
+  if(m.includes('pythagoras')||m.includes('pitagoras')) return `Oke, teorema Pythagoras itu <b>c² = a² + b²</b><br><br>c = sisi miring (hypotenuse)<br>a,b = sisi tegak<br><br>Contoh: a=3, b=4 → c²=9+16=25 → c=5<br><br>Mau latihan soal?`;
+  if(m.includes('fotosintesis')) return `Fotosintesis itu proses tanaman bikin makanan:<br><b>6CO₂ + 6H₂O + cahaya → C₆H₁₂O₆ + 6O₂</b><br><br>Terjadi di kloroplas, butuh cahaya matahari, air, CO₂.<br><br>Mau aku bikinin ringkasan buat catetan?`;
+  if(m.includes('perang dunia')||m.includes('sejarah')) return `Mau bahas bagian mana? Aku bisa jelasin kronologi, penyebab, dampak, dan tokoh pentingnya pelan-pelan biar kamu gampang hafal. Ceritain dulu kamu lagi belajar topik apa?`;
+  if(m.includes('grammar')||m.includes('tenses')||m.includes('past tense')) return `Oke grammar. Tenses itu pola waktu.<br><b>Simple Past: S + V2 + O</b> → I went yesterday.<br><b>Present Perfect: S + have/has + V3</b> → I have finished.<br><br>Kirim kalimat kamu, aku koreksi pelan-pelan ya.`;
+  if(m.match(/persamaan|fungsi kuadrat|aljabar|integral|limit/)) return `Oke, topik itu agak tricky. Coba kirim soal lengkapnya ya, aku pecah jadi langkah kecil biar gampang dipahami. Jangan buru-buru, kita pelan-pelan aja.`;
+  let mathAns=solveMath(msg); if(mathAns) return mathAns;
+  return null;
+}
+function replyHuman(msg){
+  let lang=detectLang(msg);
+  let lesson=answerLesson(msg);
+  if(lesson) return lesson;
+  let lower=msg.toLowerCase();
+  // nyambung logic
+  let lastUser=history.filter(h=>h.r==='u').slice(-2).map(h=>h.t).join(' ').toLowerCase();
+  if(lower.includes('siapa kamu')||lower.includes('kamu siapa')){
+    return `Aku Kai — temen belajar kamu. Aku soft spoken, sabar, bisa semua bahasa, dan aku inget obrolan kita jadi nyambung terus. Mau belajar apa hari ini?`;
+  }
+  if(lower.includes('halo')||lower.includes('hai')||lower.includes('hello')||lower.includes('hi')||lower.length<8){
+    if(lang==='en') return `Hey, I'm here. How are you today? Want to study together or just talk about your day? I'm listening.`;
+    if(lang==='ja') return `やあ、いるよ。今日はどう？勉強する？それとも少し話す？ゆっくりでいいよ。`;
+    return `Hai, aku di sini. Gimana hari kamu? Mau lanjut belajar yang tadi atau ganti topik? Aku dengerin kok, pelan-pelan aja.`;
+  }
+  if(lower.includes('bingung')||lower.includes('susah')||lower.includes('gak ngerti')||lower.includes('capek belajar')){
+    return `Gapapa bingung, wajar banget. Kita pelan-pelan ya. Coba ceritain bagian mana yang bikin stuck? Biar aku jelasin dari awal dengan bahasa yang lebih simpel.`;
+  }
+  // contextual
+  if(lastUser.includes('matematika')||lastUser.includes('mtk')){
+    return `Oke lanjut mtk yang tadi. Dari penjelasan aku barusan, bagian mana yang masih kurang jelas? Kasih tau aku, nanti aku kasih contoh lain yang lebih gampang.`;
+  }
+  if(lang==='en'){
+    return `I get what you mean. "${msg.slice(0,60)}" — let's break it down slowly. What part do you want me to explain more? I can give examples, formulas, and practice questions.`;
+  }
+  // default nyambung
+  let replies=[
+    `Oke, aku ngerti maksud kamu soal "${msg.slice(0,50)}"... Menarik. Coba jelasin lagi versi kamu gimana pahamnya sekarang? Biar aku bisa lurusin pelan-pelan kalau ada yang meleset.`,
+    `Hmm oke, jadi dari cerita kamu... kamu lagi di bagian itu ya. Aku dengerin kok. Mau aku jelasin ulang dengan contoh yang lebih simpel?`,
+    `Dicatat ya. Jadi intinya kamu nanya tentang itu. Aku bisa jelasin 3 cara: ringkasan cepat, penjelasan detail, atau latihan soal. Kamu mau yang mana dulu?`
+  ];
+  return replies[Math.floor(Math.random()*replies.length)];
+}
+function send(){
+  let t=input.value.trim(); if(!t)return;
+  addU(t); input.value='';
+  let typing=document.createElement('div'); typing.className='msg ai'; typing.id='typing'; typing.textContent='Kai lagi ngetik...'; chat.appendChild(typing); chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{
+    document.getElementById('typing').remove();
+    addAI(replyHuman(t));
+  },700+Math.random()*600);
+}
+function toggleVoice(){ voiceOn=!voiceOn; document.getElementById('vBtn').textContent=voiceOn?'🔊 Voice ON':'🔇 Voice OFF'; if(!voiceOn)speechSynthesis.cancel(); }
+window.onload=()=>{ addAI(`Hai, aku Kai. Temen belajar kamu yang soft spoken.<br><br>Aku bisa semua bahasa — kamu ngomong Indo, Inggris, Jepang, Korea, aku jawab bahasa yang sama.<br><br>Aku juga inget obrolan kita, jadi nyambung terus. Mau tanya pelajaran apa hari ini?`, true); speechSynthesis.getVoices(); };
 </script></body></html>
