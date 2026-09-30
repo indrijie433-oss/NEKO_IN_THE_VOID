@@ -1,0 +1,16 @@
+{
+  "name": "KAI V8 ULTIMATE",
+  "short_name": "KAI",
+  "description": "AI teman soft boy cute - bisa untuk apa aja kayak ChatGPT",
+  "start_url": "./Neko_ai_voice.html",
+  "display": "standalone",
+  "background_color": "#05070a",
+  "theme_color": "#6a80ff",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/4712/4712109.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
