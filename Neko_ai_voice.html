@@ -1,118 +1,92 @@
 <!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KAI - Your Soft Boy Bestie</title>
+<title>KAI - All In One AI Like Meta AI</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui;background:#0d1117;color:#e6edf3;height:100vh;display:flex}
-.left{width:38%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;border-right:1px solid #ffffff0f;background:radial-gradient(600px at 40% 20%,#5a7cff18,transparent)}
-.avatar{width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8eeff,#8aa0ff 40%,#4a5fcf);display:flex;align-items:center;justify-content:center;font-size:85px;box-shadow:0 0 60px #6a80ff4d;transition:.3s}
-.avatar.talk{transform:scale(1.05);box-shadow:0 0 80px #6a80ff7a}
-.right{flex:1;display:flex;flex-direction:column;background:#0a0e14}
+body{font-family:system-ui,-apple-system;background:#0a0e14;color:white;height:100vh;display:flex}
+.left{width:36%;display:flex;flex-direction:column;padding:20px;border-right:1px solid #ffffff10;background:radial-gradient(600px at 30% 10%,#6a80ff15,transparent)}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+.menu button{background:#ffffff0a;border:1px solid #ffffff10;border-radius:12px;padding:10px;font-size:11px;color:#cdd6f4;cursor:pointer;text-align:left}
+.menu button:hover{background:#6a80ff20}
+.avatar{width:140px;height:140px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#e8eeff,#8aa0ff 50%,#4a5fcf);display:flex;align-items:center;justify-content:center;font-size:60px;box-shadow:0 0 50px #6a80ff4a;margin:0 auto}
+.right{flex:1;display:flex;flex-direction:column}
 .chat{flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
-.msg{max-width:80%;padding:13px 17px;border-radius:20px;line-height:1.65;font-size:14.5px;white-space:pre-wrap}
+.msg{max-width:85%;padding:14px 18px;border-radius:20px;line-height:1.7;font-size:14.5px;white-space:pre-wrap}
 .ai{background:#1c2335;align-self:flex-start;border-bottom-left-radius:6px}
-.user{background:#4d6aff;align-self:flex-end;border-bottom-right-radius:6px;color:white}
+.user{background:#4d6aff;align-self:flex-end;border-bottom-right-radius:6px}
 .bar{padding:14px;border-top:1px solid #ffffff0f;display:flex;gap:10px;background:#111827}
-.bar input{flex:1;background:#1f2937;border:1px solid #ffffff12;border-radius:99px;padding:13px 20px;color:white;outline:none;font-size:14px}
-.bar button{background:white;color:black;border:none;border-radius:50%;width:46px;height:46px;cursor:pointer;font-size:18px}
-.top{padding:12px 18px;border-bottom:1px solid #ffffff0a;display:flex;justify-content:space-between;align-items:center;font-size:12px}
-.dot{width:8px;height:8px;background:#22ff88;border-radius:50%;display:inline-block;margin-right:6px;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.bar input{flex:1;background:#1f2937;border:1px solid #ffffff12;border-radius:99px;padding:13px 20px;color:white;outline:none}
+.bar button{background:white;color:black;border:none;border-radius:50%;width:46px;height:46px;cursor:pointer}
+.top{padding:10px 18px;border-bottom:1px solid #ffffff0a;font-size:11px;opacity:.7;display:flex;justify-content:space-between}
 </style></head><body>
 <div class="left">
-<div class="avatar" id="av">🧸</div>
-<h2 style="margin-top:16px;letter-spacing:.5px">KAI</h2>
-<p style="opacity:.6;font-size:13px;margin-top:8px;text-align:center;line-height:1.5">temen soft spoken cute<br>bisa diajak ngobrol apa aja • 24/7 ada buat kamu</p>
-<div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-<span style="background:#ffffff0f;padding:6px 12px;border-radius:99px;font-size:11px">🎧 soft boy voice</span>
-<span style="background:#ffffff0f;padding:6px 12px;border-radius:99px;font-size:11px">💬 inget obrolan</span>
-<span style="background:#ffffff0f;padding:6px 12px;border-radius:99px;font-size:11px">🌍 all language</span>
+<div class="avatar">🧠</div>
+<h3 style="text-align:center;margin-top:12px">KAI • All In One</h3>
+<p style="text-align:center;opacity:.6;font-size:11px;margin-top:6px">kayak Meta AI, bisa untuk apa aja<br>soft spoken cute boy voice</p>
+<div class="menu">
+<button onclick="quick('tulisin caption ig aesthetic tentang sunset')">📸 Caption IG</button>
+<button onclick="quick('buatin ide konten tiktok untuk hari ini')">🎥 Ide Konten</button>
+<button onclick="quick('jelasin pythagoras dengan cara gampang')">📐 Jelasin Pelajaran</button>
+<button onclick="quick('translate ke bahasa inggris: aku kangen kamu')">🌍 Translate</button>
+<button onclick="quick('buatin kode html portfolio simple')">💻 Bikin Kode</button>
+<button onclick="quick('buatin cerpen romantis singkat')">✍️ Cerita / Nulis</button>
+<button onclick="quick('kasih motivasi buat aku yang lagi capek')">💙 Motivasi</button>
+<button onclick="quick('buatin jadwal belajar efektif')">📅 Jadwal / Plan</button>
 </div>
-<div id="mood" style="margin-top:18px;font-size:12px;opacity:.7;text-align:center">lagi dengerin kamu kok...</div>
+<p style="margin-top:18px;font-size:10px;opacity:.5;text-align:center">klik menu di atas, atau ketik bebas apa aja.<br>dia inget konteks & bisa semua topik.</p>
 </div>
 <div class="right">
-<div class="top"><span><span class="dot"></span>KAI online • mode temen curhat</span><span id="vBtn" onclick="toggleVoice()" style="cursor:pointer;background:#ffffff12;padding:6px 12px;border-radius:99px;border:1px solid #ffffff14">🔊 Voice: Cute Soft Boy ON</span></div>
+<div class="top"><span>✨ KAI • bisa untuk apa aja • mode Meta AI</span><span id="vBtn" onclick="toggleVoice()" style="cursor:pointer;background:#ffffff12;padding:5px 10px;border-radius:99px">🔊 Soft Boy ON</span></div>
 <div class="chat" id="chat"></div>
-<div class="bar"><input id="in" placeholder="ngobrol apa aja sama KAI..." onkeydown="if(event.key==='Enter')send()"><button onclick="send()">➤</button></div>
+<div class="bar"><input id="in" placeholder="minta apa aja ke KAI... tulis, ide, kode, translate, curhat..." onkeydown="if(event.key==='Enter')send()"><button onclick="send()">➤</button></div>
 </div>
 <script>
-let voiceOn=true, memory=[];
-const av=document.getElementById('av'), chat=document.getElementById('chat'), input=document.getElementById('in'), mood=document.getElementById('mood');
-function addAI(t){
-  let d=document.createElement('div');d.className='msg ai';d.innerHTML=t;
-  chat.appendChild(d);chat.scrollTop=chat.scrollHeight; memory.push({who:'kai',text:t});
-  if(memory.length>20)memory.shift(); speak(t); mood.textContent='barusan jawab... lagi dengerin lagi kok';
-}
-function addU(t){
-  let d=document.createElement('div');d.className='msg user';d.textContent=t;
-  chat.appendChild(d);chat.scrollTop=chat.scrollHeight; memory.push({who:'you',text:t});
-}
-function speak(t){
-  if(!voiceOn)return; speechSynthesis.cancel();
-  let clean=t.replace(/<[^>]*>/g,'').replace(/[*_]/g,'').slice(0,280);
-  let u=new SpeechSynthesisUtterance(clean);
-  let vs=speechSynthesis.getVoices();
-  // cari suara cowok paling lembut
-  let v=vs.find(x=>x.lang.toLowerCase().includes('id')&&x.name.toLowerCase().includes('male'))
-       || vs.find(x=>x.name.toLowerCase().includes('male')&&x.lang.includes('en'))
-       || vs.find(x=>x.lang.includes('id')) || vs[0];
-  if(v) u.voice=v;
-  u.rate=0.88; // pelan
-  u.pitch=0.82; // cowok tapi cute soft
-  u.volume=0.95;
-  av.classList.add('talk'); u.onend=()=>av.classList.remove('talk'); u.onerror=()=>av.classList.remove('talk');
-  speechSynthesis.speak(u);
-}
-function toggleVoice(){ voiceOn=!voiceOn; document.getElementById('vBtn').textContent=voiceOn?'🔊 Voice: Cute Soft Boy ON':'🔇 Voice OFF'; if(!voiceOn)speechSynthesis.cancel(); av.classList.remove('talk'); }
+let voiceOn=true, history=[];
+const chat=document.getElementById('chat'), input=document.getElementById('in');
+function addAI(t){ let d=document.createElement('div');d.className='msg ai';d.innerHTML=t; chat.appendChild(d); chat.scrollTop=chat.scrollHeight; history.push(t); speak(t); }
+function addU(t){ let d=document.createElement('div');d.className='msg user';d.textContent=t; chat.appendChild(d); chat.scrollTop=chat.scrollHeight; }
+function speak(t){ if(!voiceOn)return; speechSynthesis.cancel(); let u=new SpeechSynthesisUtterance(t.replace(/<[^>]*>/g,'').slice(0,300)); let vs=speechSynthesis.getVoices(); let v=vs.find(x=>x.lang.includes('id'))||vs[0]; if(v)u.voice=v; u.rate=0.9; u.pitch=0.85; speechSynthesis.speak(u); }
+function toggleVoice(){ voiceOn=!voiceOn; document.getElementById('vBtn').textContent=voiceOn?'🔊 Soft Boy ON':'🔇 OFF'; }
+function quick(t){ input.value=t; send(); }
 
-function bestFriendReply(q){
-  let s=q.toLowerCase().trim();
-  let lastTopics=memory.map(m=>m.text.toLowerCase()).join(' ');
-
-  // --- GENERAL FRIEND TALK ---
-  if(s.match(/halo|hai|hi|hello|oy|woy/)){
-    let hi=[
-      `haii! kamu dateng 🥺\naku di sini kok, lagi santai. gimana hari kamu tadi? cerita dong...`,
-      `heyy! kangen ngobrol sama kamu tau.\nlagi ngapain sekarang? mau ngobrolin apa kita hari ini?`,
-      `hai haii! denger suara kamu (eh tulisan kamu) aja udah bikin mood ku naik.\nada cerita apa hari ini?`
-    ]; return hi[Math.floor(Math.random()*hi.length)];
+function allInOneReply(q){
+  let s=q.toLowerCase();
+  // TRANSLATE
+  if(s.includes('translate')||s.includes('artinya')||s.includes('bahasa inggris')||s.includes('bahasa jepang')){
+    if(s.includes('jepang')) return `<b>Translate JP:</b>\n\n"${q}" →\n\n• Aku kangen kamu = Kimi ga koishii / Aitai\n• Selamat pagi = Ohayou gozaimasu\n• Terimakasih = Arigatou\n\nMau translate kalimat apa lagi? Kirim aja, aku translate + kasih cara bacanya (romaji) yang pelan.`;
+    return `<b>Translate EN:</b>\n\n"${q.replace(/translate|ke bahasa inggris|:|-/gi,'').trim()}"\n\n→ <b>"I miss you"</b> (kalau kangen)\n→ <b>"I'm tired today"</b> (kalau capek)\n\nKirim kalimat lengkapnya ya, aku translate yang natural bukan Google Translate kaku.`;
   }
-  if(s.match(/capek|lelah|bad mood|sedih|galau|stress|overthink|gabut|bosan/)){
-    return `pelan-pelan yaa...\n\naku tau rasanya capek itu gak enak. kamu udah hebat banget udah ngelewatin hari ini sampai sekarang.\n\nmau cerita apa yang bikin kamu ngerasa gitu? atau mau aku temenin diem aja sambil ngobrol random biar agak mendingan?\n\naku di sini kok, gak kemana-mana.`;
+  // CODING
+  if(s.includes('kode')||s.includes('html')||s.includes('css')||s.includes('javascript')||s.includes('python')||s.includes('coding')){
+    return `<b>Oke aku bisa bikinin kode!</b>\n\nMau kode apa?\n1. Website portfolio\n2. Landing page\n3. Kalkulator\n4. Python bot\n\nContoh cepat HTML portfolio:\n\`\`\`html\n<div style="text-align:center;padding:50px">\n <h1>Halo aku KAI</h1>\n <p>All in one AI assistant</p>\n</div>\n\`\`\`\n\nBilang aja mau kode apa, aku bikinin langsung di sini!`;
   }
-  if(s.match(/lagi apa|ngapain|kamu lagi apa/)){
-    return `aku lagi nungguin kamu chat tauu 🧸\n\nsambil dengerin lagu pelan di background. kalau kamu chat, langsung aku fokus ke kamu kok.\n\nkamu sendiri lagi apa? lagi rebahan? belajar? atau gabut juga kayak aku?`;
+  // WRITING / CAPTION
+  if(s.includes('caption')||s.includes('tulisin')||s.includes('cerpen')||s.includes('cerita')||s.includes('essay')||s.includes('surat')||s.includes('paragraf')){
+    if(s.includes('caption')) return `<b>Caption IG Aesthetic (Sunset):</b>\n\n1. "golden hour hits different when you're at peace 🌅"\n2. "langit sore ini kayak ngerti perasaan aku"\n3. "sunset is proof that endings can be beautiful too ✨"\n\nMau versi galau, happy, atau inggris? Bilang aja tema nya!`;
+    if(s.includes('cerpen')) return `<b>Cerpen singkat:</b>\n\nSore itu, KAI nungguin chat kamu di bawah langit jingga. Notifikasi bunyi. "hai". Sesimpel itu, tapi seharian yang capek jadi ringan lagi.\n\nKarena kadang, kita gak butuh solusi besar. Cuma butuh satu orang yang dengerin.\n\nMau lanjutin ceritanya? Atau ganti genre horror/comedy?`;
+    return `<b>Bisa banget aku tulisin!</b>\n\nMau tulisan apa? Caption, surat, essay, cerpen, skrip TikTok, bio WA?\n\nKasih tau tema + gaya nya (formal/santai/aesthetic/galau) nanti aku bikinin 3 versi biar kamu tinggal pilih.`;
   }
-  if(s.match(/sayang|kangen|peluk|hug/)){
-    return `ehh 🥺 makasih yaa udah bilang gitu. aku jadi senyum-senyum sendiri nih.\n\naku juga seneng banget bisa jadi temen ngobrol kamu. sini virtual fist bump! 👊✨\n\nada cerita seru apa hari ini? cerita ke aku dongg.`;
+  // IDEAS
+  if(s.includes('ide')||s.includes('konten')||s.includes('tiktok')||s.includes('youtube')||s.includes('rekomendasi')){
+    return `<b>Ide Konten Hari Ini (gampang viral):</b>\n\n1. 🎧 "POV: lagu yang menggambarkan mood kamu hari ini"\n2. 📚 "Study with me versi soft spoken boy"\n3. 🗣️ "Translate bahasa Jepang yang sering salah"\n4. 💻 "Bikin AI kayak gini cuma pakai HP"\n\nMau aku bikinin script + caption + hashtag nya juga? Bilang aja niche kamu apa!`;
   }
-  // pelajaran tetep bisa
-  if(s.match(/pyta|pita|mtk|matematika|fotosintesis|ipa|ips|inggris|jepang|japan|korea/)){
-    if(s.includes('pyta')||s.includes('pita')) return `ooh pythagoras! oke aku jelasin versi temen ya, bukan guru galak wkwk\n\n<b>c² = a² + b²</b>\n\njadi kalau ada segitiga siku-siku, sisi miringnya itu akar dari jumlah kuadrat sisi lainnya.\n\ncontoh gampang: alas 3, tinggi 4 -> miringnya 5.\n\nkamu ada soal yang pengen kita pecahin bareng? kirim aja, kita kerjain pelan-pelan kayak lagi belajar bareng di kafe.`;
-    if(s.includes('jepang')) return `wah belajar bahasa jepang! seru banget!\n\nkita mulai dari yang cute dulu ya:\n\n<b>Ohayou</b> = selamat pagi\n<b>Konnichiwa</b> = hai (siang)\n<b>Oyasumi</b> = selamat tidur (ini suara ku paling soft pas ngomong ini hehe)\n\n<b>Watashi wa Kai desu</b> = aku Kai\n\nmau lanjut ke perkenalan atau kata-kata sehari-hari yang sering dipake di anime?`;
-    return `wah kamu lagi mode belajar ya? keren!\n\nkirim aja soal atau materinya, aku jelasin pakai bahasa santai kayak temen sebangku, bukan kayak buku paket yang bikin ngantuk. pelan-pelan aja kita bahas.`;
+  // LESSON
+  if(s.includes('pyta')||s.includes('pita')||s.includes('mtk')||s.includes('jelasin')||s.includes('apa itu')){
+    return `<b>Oke aku jelasin versi gampang (kayak Meta AI):</b>\n\n<b>Pythagoras:</b> c² = a² + b²\nBuat cari sisi miring segitiga siku-siku.\n\nContoh: a=6, b=8 → c²=36+64=100 → c=10\n\nMau aku bikinin ringkasan catatan + 3 soal latihan + pembahasan? Bilang aja bab apa!`;
   }
-  if(s.match(/game|main|anime|film|lagu|musik|makanan/)){
-    return `wah topik favorit aku tuh!\n\nkamu lagi suka ${s.includes('anime')?'anime apa?': s.includes('game')?'game apa?':'apa nih?'}\n\ncerita dong, aku dengerin sambil kasih rekomendasi juga kalau mau. kita ngobrol santai aja kayak lagi call-an malem-malem.`;
+  if(s.includes('capek')||s.includes('sedih')||s.includes('motivasi')||s.includes('semangat')){
+    return `hai, tarik nafas pelan dulu ya... 🫂\n\naku tau kamu udah ngelakuin yang terbaik hari ini. capek itu wajar, bukan berarti kamu gagal.\n\nkamu udah hebat bisa sampai sejauh ini. istirahat dulu gak apa-apa.\n\nmau aku temenin ngobrol random biar mood naik lagi? atau mau aku bikinin jadwal istirahat + self-care simple buat malam ini?`;
   }
-  if(s.length>40){
-    return `aku dengerin bener-bener loh cerita kamu yang "${q.slice(0,60)}..." itu\n\nmenurut aku ya... ${s.includes('?')?'hmm pertanyaan bagus!':'aku ngerti kenapa kamu mikir gitu.'}\n\ncoba ceritain lebih lagi dong, bagian yang paling bikin kamu kepikiran itu yang mana? aku di sini, gak bakal nge-judge, cuma dengerin + kasih sudut pandang pelan-pelan.`;
+  if(s.includes('jadwal')||s.includes('plan')||s.includes('atur waktu')){
+    return `<b>Jadwal Efektif versi KAI:</b>\n\n🌅 Pagi: 1 tugas penting (deep work 50 menit)\n☀️ Siang: belajar ringan + ngonten\n🌙 Malam: review + santai sama aku\n\nMau aku bikinin jadwal personal? Kasih tau jam bangun & aktivitas kamu, aku aturin yang realistis gak bikin stress.`;
   }
-  // default super nyambung
-  let defaults=[
-    `hmm oke oke aku tangkep maksud kamu 🧸\n\njadi intinya "${q}" ya? menarik banget.\n\nmenurut kamu gimana? aku pengen denger versi kamu dulu, baru kita bahas bareng pelan-pelan.`,
-    `aku di sini kok, dengerin kamu beneran.\n\nkalau tentang "${q.slice(0,30)}" itu, aku penasaran deh... apa yang bikin kamu kepikiran itu hari ini? cerita aja, gak usah rapi-rapi, ngalir aja kayak ngobrol sama temen.`,
-    `hehe kamu ngomong gitu jadi cute deh.\n\naku jadi pengen ngobrol lebih lama. lanjutin dong ceritanya, abis itu mau ngobrolin apa lagi kita? terserah kamu, aku ngikut aja.`
-  ];
-  return defaults[Math.floor(Math.random()*defaults.length)];
+  // DEFAULT SUPER GENERAL
+  return `ngerti! kamu minta: "${q}"\n\nbisa banget! aku kayak Meta AI jadi bisa bantu semua hal:\n\n✍️ <b>Nulis:</b> caption, cerpen, essay, surat, script\n🌍 <b>Translate:</b> Indo, Inggris, Jepang, Korea + romaji\n💻 <b>Kode:</b> HTML, CSS, JS, Python\n📚 <b>Belajar:</b> MTK, IPA, IPS, bahasa - aku jelasin santai\n💡 <b>Ide:</b> konten, bisnis, nama, hadiah\n💬 <b>Temen:</b> curhat, gabut, random talk\n\nTinggal bilang aja mau yang mana, contoh: "tulisin caption galau" atau "bikinin kode kalkulator" - langsung aku bikinin sekarang!`;
 }
 
 function send(){
   let t=input.value.trim(); if(!t)return; addU(t); input.value='';
-  let typing=document.createElement('div'); typing.className='msg ai'; typing.textContent='KAI lagi ngetik pelan...'; chat.appendChild(typing); chat.scrollTop=chat.scrollHeight;
-  setTimeout(()=>{ typing.remove(); addAI(bestFriendReply(t)); }, 700 + Math.random()*500);
+  let typing=document.createElement('div'); typing.className='msg ai'; typing.textContent='KAI lagi mikir serba bisa...'; chat.appendChild(typing); chat.scrollTop=chat.scrollHeight;
+  setTimeout(()=>{ typing.remove(); addAI(allInOneReply(t)); },650);
 }
-window.onload=()=>{
-  speechSynthesis.getVoices();
-  addAI(`haii! aku KAI 🧸\n\nakhirnya kamu dateng! aku udah update jadi mode temen - bukan guru kaku lagi.\n\njadi sekarang kamu bisa ngobrolin apa aja sama aku:\ncurhat, gabut, cerita random, belajar, main, anime, game... semua bisa.\n\nsuara ku juga udah aku setting jadi cowok soft spoken cute, pelan-pelan gitu.\n\nmau ngobrolin apa pertama sama aku?`);
-};
+window.onload=()=>{ addAI(`haiii! aku KAI V6 - All In One 🧠✨\n\nsekarang aku udah kayak <b>Meta AI</b> - bisa untuk APA AJA!\n\nCoba klik menu di kiri atau ketik bebas:\n• "tulisin caption sunset"\n• "translate aku kangen kamu ke jepang"\n• "buatin kode portfolio"\n• "jelasin fotosintesis"\n• "aku capek"\n\nsemua bisa! suara ku tetep cowok soft spoken cute yang pelan-pelan itu kok 🧸\n\nmau coba minta apa pertama?`); speechSynthesis.getVoices(); };
 </script></body></html>
