@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Leni</title>
+<style>
+body{margin:0;height:100vh;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden; font-family: sans-serif;}
+.heart{position:relative;width:400px;height:400px;display:flex;justify-content:center;align-items:center;}
+.center-name{
+  position:absolute; color:white; font-size:3.5rem; font-weight:bold; 
+  text-shadow:0 0 20px #ff4d8d, 0 0 40px #ff4d8d;
+  z-index:10;
+  animation: degup 1s infinite alternate;
+}
+@keyframes degup{
+  from{transform:scale(1)}
+  to{transform:scale(1.15)}
+}
+.love_word{
+  position:absolute; color:#ea80b0; font-size:13px; font-weight:bold;
+  text-shadow:0 0 10px #fff; white-space:nowrap;
+  left:50%; top:50%;
+  animation: gerak 3s forwards;
+}
+@keyframes gerak{
+  0%{opacity:0; transform:translate(-50%,-50%) scale(0)}
+  20%{opacity:1}
+  100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1)}
+}
+</style>
+</head>
+<body>
+<div class="heart">
+  <div class="center-name">Leni 💖</div>
+  <div id="container"></div>
+</div>
+<script>
+const container = document.getElementById('container');
+function buatLove(){
+  container.innerHTML = '';
+  for(let i=0;i<100;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='love_word';
+      el.innerText='I love you';
+      let t=Math.random()*Math.PI*2;
+      let x=16*Math.pow(Math.sin(t),3);
+      let y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+      x=x*12; y=y*12;
+      el.style.setProperty('--x',`calc(-50% + ${x}px)`);
+      el.style.setProperty('--y',`calc(-50% + ${y}px)`);
+      container.appendChild(el);
+    },i*50);
+  }
+}
+buatLove();
+setInterval(buatLove, 4000);
+</script>
+</body>
+</html>
